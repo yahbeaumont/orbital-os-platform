@@ -1,0 +1,58 @@
+---
+config:
+  layout: elk
+  flowchart:
+    nodeSpacing: 40
+    rankSpacing: 70
+---
+flowchart TB
+  subgraph L1["1. Interface"]
+    direction LR
+    UI["Desktop interface"]
+  end
+  subgraph L2["2. Boundary"]
+    direction LR
+    API["Local API gateway"]
+    CLI["Command line"]
+    API ~~~ CLI
+  end
+  subgraph L3["3. Orchestration"]
+    direction LR
+    IE["Intelligence Engine"]
+    RTE["Routing Engine"]
+    AR["Agent Runtime"]
+    IE ~~~ RTE ~~~ AR
+  end
+  subgraph L4["4. Cognition"]
+    direction LR
+    MEM["Memory Engine"]
+    EXP["Experience Engine"]
+    LRN["Learning Engine"]
+    EVA["Evaluation Engine"]
+    MEM ~~~ EXP ~~~ LRN ~~~ EVA
+  end
+  subgraph L5["5. Execution"]
+    direction LR
+    HWD["Hardware Detection"]
+    CMP["Compatibility Engine"]
+    REG["Model Registry"]
+    MGR["Model Manager"]
+    RUN["Model Runtime"]
+  end
+  subgraph L6["6. Foundation"]
+    direction LR
+    POL["Policy Engine: default deny, every sensitive action asks it"]
+    FND["Configuration, logging, paths, storage"]
+    POL ~~~ FND
+  end
+  ADP["Runtime adapters: llama.cpp, Ollama, vLLM, Transformers, MLX optional"]
+
+  L1 --> L2
+  L2 --> L3
+  L3 --> L4
+  L4 --> L5
+  L5 --> L6
+  RUN --> ADP
+
+  RULE["Dependency rule: a layer may depend only on the layers below it, never on the layers above. An import graph test enforces it, so an inversion fails the build."]
+  L6 --- RULE

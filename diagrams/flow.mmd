@@ -1,0 +1,20 @@
+flowchart TD
+  C["Client: desktop interface, command line or compatible caller"] --> G["Local API gateway"]
+  G --> P{"Policy Engine"}
+  P -- "deny" --> X["Refusal with reason, recorded in the audit trail"]
+  P -- "allow, with scope" --> I["Intelligence Engine: intent, complexity, context budget"]
+  I --> M["Memory Engine: consented retrieval with origin"]
+  M --> R["Routing Engine: model, runtime, fallback chain"]
+  R --> K{"Compatibility Engine"}
+  K -- "fits with margin" --> A["Runtime adapter: load and configure"]
+  K -- "does not fit" --> Y["Offer a smaller model or a shorter context"]
+  A --> T["Generate with streaming"]
+  T --> E{"Evaluation Engine"}
+  E -- "configured" --> Q["Score the output and check for regression"]
+  E -- "not configured" --> S["Response with execution metrics"]
+  Q --> S
+  Y --> S
+  X --> C
+  S --> C
+  S --> Z["Experience Engine: record only where consent exists"]
+  Z --> L["Learning queue, outside the request path"]

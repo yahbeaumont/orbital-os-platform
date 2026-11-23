@@ -1,0 +1,50 @@
+# Local environment
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Model artifacts and local data
+models/
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+data/
+cache/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Logs and local reports
+logs/
+*.log
+*.local.json
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Rendered diagram exports kept locally
+diagrams/*.svg
